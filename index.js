@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 
@@ -5,9 +6,13 @@ const headlebarsExpress = require('express-handlebars')
 
 const config = require('./config/config.js')
 
-
-app.engine('hbs', headlebarsExpress({extname: ".hbs"}))
+// setup express- headnlebars
+app.engine('hbs', headlebarsExpress({ extname: ".hbs" }))
 app.set('view engine', 'hbs')
+
+
+// setup middleware 
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
     console.log('its works')
