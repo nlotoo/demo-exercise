@@ -2,22 +2,14 @@
 const express = require('express');
 const app = express();
 
-const headlebarsExpress = require('express-handlebars')
+const expressConfig=require('./config/express')
 
 const config = require('./config/config.js')
+const router = require('./routes')
 
-// setup express- headnlebars
-app.engine('hbs', headlebarsExpress({ extname: ".hbs" }))
-app.set('view engine', 'hbs')
+expressConfig(app)
 
 
-// setup middleware 
-app.use(express.static('public'))
-
-app.get('/', (req, res) => {
-    console.log('its works')
-    res.render('home')
-
-})
+app.use(router)
 
 app.listen(config.PORT, () => console.log(`Server start at port ${config.PORT}`))
