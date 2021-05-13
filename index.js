@@ -12,4 +12,7 @@ expressConfig(app)
 
 app.use(router)
 
+
+
+
 app.listen(config.PORT, () => console.log(`Server start at port ${config.PORT}`))
