@@ -2,7 +2,7 @@ const uniqueId = require('unique')
 const cubeMaker = require('../models/cubic')
 const fs = require('fs')
 const database = require('../config/db.json')
-
+const path = require('path')
 
 function getAllData() {
     return database
@@ -13,10 +13,7 @@ function getOne(id) {
 
 }
 
-
-
 function create(data) {
-
 
     const upComingData = new cubeMaker(uniqueId(),
         data.name,
@@ -26,7 +23,7 @@ function create(data) {
 
     database.push(upComingData)
 
-    fs.writeFile(__dirname + '/../config/db.json', JSON.stringify(database), (err) => {
+    fs.writeFile(path.join(__dirname , '/../config/db.json'), JSON.stringify(database), (err) => {
         if (err) {
             console.log(err)
             return
