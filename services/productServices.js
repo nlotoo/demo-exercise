@@ -8,6 +8,11 @@ function getAllData() {
     return database
 }
 
+function getOne(id) {
+    return database.find(x => x.id == id)
+
+}
+
 
 
 function create(data) {
@@ -26,8 +31,6 @@ function create(data) {
             console.log(err)
             return
         }
-
-
     })
 
 }
@@ -35,5 +38,6 @@ function create(data) {
 
 module.exports = {
     create,
-    getAllData,   
+    getAllData,
+    getOne,
 }

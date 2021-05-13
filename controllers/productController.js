@@ -10,7 +10,7 @@ let product = productServices.getAllData
 router.get('/', (req, res) => {
     res.render('home', { title: 'Home', product })
 
-
+    console.log(product)
 });
 
 router.get('/create', (req, res) => {
@@ -21,14 +21,16 @@ router.post('/create', (req, res) => {
 
     // TODO: VALIDATION
     productServices.create(data)
+    res.redirect('/')
 
-    res.redirect('/create')
-  
 })
 
 
 router.get('/details/:id?', (req, res) => {
-    res.render('details', { title: 'Details' })
+
+    products = productServices.getOne(req.params.id)
+    res.render('details', { title: 'Details', products })
+
 })
 
 
