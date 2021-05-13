@@ -1,12 +1,16 @@
 const { Router } = require('express');
 const router = Router();
 
-const cubeMaker = require('../modules/cubic')
-const uniqueId = require('unique')
+// const cubeMaker = require('../models/cubic')
+// const uniqueId = require('unique')
 
+const productServices = require('../services/productServices.js')
+let product = productServices.getAllData
 
 router.get('/', (req, res) => {
-    res.render('home', { title: 'Home' })
+    res.render('home', { title: 'Home', product })
+
+
 });
 
 router.get('/create', (req, res) => {
@@ -15,24 +19,11 @@ router.get('/create', (req, res) => {
 router.post('/create', (req, res) => {
     let data = req.body
 
-    //  TODO: VALIDATION
-    // if (data.name.length < 6) {
+    // TODO: VALIDATION
+    productServices.create(data)
 
-    //     throw new Error('Your name is incorect lenngth')
-    // }
-
-
-    // ДО ТУК
-
-    let make = new cubeMaker(uniqueId(),
-        data.name,
-        data.description,
-        data.imageUrl,
-        data.dificultyLevel)
-
-    console.log(make)
-
-    res.redirect('/')
+    res.redirect('/create')
+  
 })
 
 
