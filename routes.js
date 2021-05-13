@@ -1,9 +1,13 @@
 const { Router } = require('express');
 const router = Router();
 
+//екстрактвам боду парсера
+const bodyParser = require('body-parser')
+router.use(bodyParser.urlencoded({ extended: true }))
+
+
 const controlerProduction = require('./controllers/productController')
 const aboutControler = require('./controllers/aboutController')
-//const detailsController = require('./controllers/detailControler')
 const NotFoundController = require('./controllers/notFoundController')
 
 
