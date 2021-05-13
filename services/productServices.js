@@ -4,8 +4,21 @@ const fs = require('fs')
 const database = require('../config/db.json')
 const path = require('path')
 
-function getAllData() {
-    return database
+function getAllData(query) {
+    let result = database
+
+
+    if (query.search) {
+        result = database.filter(x => x.name.toLowerCase().includes(query.search))
+    } else if (query.from) {
+        result = database.filter(x => Number(x.difficultyLevel) >= query.from)
+    } else if (query.to) {
+        result = database.filter(x => Number(x.difficultyLevel) <= query.to)
+    }
+
+
+
+    return result
 }
 
 function getOne(id) {
@@ -23,7 +36,7 @@ function create(data) {
 
     database.push(upComingData)
 
-    fs.writeFile(path.join(__dirname , '/../config/db.json'), JSON.stringify(database), (err) => {
+    fs.writeFile(path.join(__dirname, '/../config/db.json'), JSON.stringify(database), (err) => {
         if (err) {
             console.log(err)
             return

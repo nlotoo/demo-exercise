@@ -1,16 +1,18 @@
 const { Router } = require('express');
 const router = Router();
 
-// const cubeMaker = require('../models/cubic')
-// const uniqueId = require('unique')
+
 
 const productServices = require('../services/productServices.js')
-let product = productServices.getAllData
+
 
 router.get('/', (req, res) => {
+    let product = productServices.getAllData(req.query)
+    console.log(req.query.search)
+
     res.render('home', { title: 'Home', product })
 
-    console.log(product)
+   
 });
 
 router.get('/create', (req, res) => {
